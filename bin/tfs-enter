@@ -1,0 +1,5 @@
+#!/bin/bash
+
+DIR="$( cd "$( dirname "$( readlink "${BASH_SOURCE[0]}" )" )" >/dev/null 2>&1 && pwd )"
+
+exec docker exec -w ${PWD} -it tfs-daemon /bin/bash
