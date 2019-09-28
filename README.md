@@ -10,3 +10,6 @@ a collection of helpers for using tensorflow-swift in docker.
 ```
 
 Note that you need a docker daemon with `--experimental` installed to enable docker buildkit's features.
+
+## todo
+- setuid within container to match outer uid

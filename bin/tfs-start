@@ -1,6 +1,6 @@
 #!/bin/bash
 if [ -z "$(docker ps -q -f name=tfs-daemon)" ]; then
-    echo '~~ booting tensorflow-swift... ~~' 1>&2
+    echo '~~ booting fresh tensorflow-swift image ~~' 1>&2
     ## run a docker image with permissions for LLDB and the current directory mounted; let it run for 1 hour
     exec docker run -d --cap-add=SYS_PTRACE --security-opt seccomp=unconfined \
         -v "${HOME}:${HOME}" --name tfs-daemon kazimuth2/tensorflow-swift sleep 3600
@@ -9,6 +9,6 @@ if [ -z "$(docker ps -q -f name=tfs-daemon)" ]; then
         sleep 1 
     done
 else
-    echo 'found tensorflow-swift' 1>&2
+    echo '~~ found existing tensorflow-swift image ~~' 1>&2
 fi
 
