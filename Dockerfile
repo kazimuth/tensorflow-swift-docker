@@ -3,6 +3,8 @@ FROM ubuntu:18.04
 
 ARG DEBIAN_FRONTEND=noninteractive
 
+COPY ./dedup.sh /usr/bin/dedup.sh
+
 RUN --mount=type=cache,target=/var/cache/apt --mount=type=cache,target=/var/lib/apt \
     rm -f /etc/apt/apt.conf.d/docker-clean && \
     echo 'Binary::apt::APT::Keep-Downloaded-Packages "true";' > /etc/apt/apt.conf.d/keep-cache && \
@@ -11,8 +13,9 @@ RUN --mount=type=cache,target=/var/cache/apt --mount=type=cache,target=/var/lib/
     apt-get install -y clang libblocksruntime-dev git cmake ninja-build clang python uuid-dev \
                        libicu-dev icu-devtools libedit-dev libxml2-dev libsqlite3-dev swig \
                        libpython-dev libncurses5-dev pkg-config libcurl4-openssl-dev systemtap-sdt-dev tzdata rsync libpython3.6-dev sudo \
-                       python3-pip
-ADD ./swift-tensorflow-RELEASE-0.5-cuda10.0-cudnn7-ubuntu18.04.tar.gz /
+                       python3-pip && \
+    dedup.sh /
+COPY ./usr /
 RUN --mount=type=cache,target=/tmp/sourcekit-lsp/ \
     cd /tmp/sourcekit-lsp && \
     ls -alt && \

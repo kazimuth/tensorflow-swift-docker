@@ -1,3 +1,4 @@
 *.tar.gz
 *.so
 sourcekit-lsp
+usr
