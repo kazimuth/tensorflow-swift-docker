@@ -1,0 +1,5 @@
+#!/bin/bash
+echo '~~ killing any tfs-daemon container ~~' 1>&2
+docker container kill tfs-daemon
+docker container rm tfs-daemon
+
